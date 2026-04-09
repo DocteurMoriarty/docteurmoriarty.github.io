@@ -2,43 +2,18 @@
 layout: default
 title: Accueil
 ---
-<section class="hero">
-  <p class="eyebrow">Base de documentation</p>
-  <h1>Documentation technique simple en Markdown.</h1>
-  <p class="hero-copy">
-    Une page d'accueil simple, des themes clairs et une liste d'articles lisible. Ajoute un fichier
-    <code>.md</code> dans <code>_articles/</code> et il apparait automatiquement.
-  </p>
-</section>
-
-<section id="categories" class="section-block">
-  <h2>Navigation par theme</h2>
-  <p class="section-copy">Choisis un theme pour aller directement a la bonne section.</p>
-  <label class="topic-label" for="topic-select">Themes</label>
-  <select id="topic-select" class="topic-select" onchange="if (this.value) window.location=this.value;">
-    <option value="">Selectionner un theme</option>
-    {% for category in site.data.categories %}
-      {% assign posts_in_category = site.articles | where: "category", category.slug %}
-      {% if posts_in_category.size > 0 %}
-        <option value="#{{ category.slug }}">{{ category.title }}</option>
-      {% endif %}
-    {% endfor %}
-  </select>
-</section>
-
-<section id="articles" class="section-block">
-  <h2>Articles</h2>
-  <p class="section-copy">Index simple des notes publiees.</p>
+<section class="doc-page">
+  <header class="doc-header">
+    <h1>Documentation</h1>
+    <p>Index simple des notes publiees en Markdown.</p>
+  </header>
 
   {% assign sorted_articles = site.articles | sort: "date" | reverse %}
   {% for category in site.data.categories %}
     {% assign posts_in_category = sorted_articles | where: "category", category.slug %}
     {% if posts_in_category.size > 0 %}
       <section id="{{ category.slug }}" class="topic-section">
-        <h3>{{ category.title }}</h3>
-        {% if category.description %}
-          <p>{{ category.description }}</p>
-        {% endif %}
+        <h2>{{ category.title }}</h2>
         <ul class="doc-list">
           {% for article in posts_in_category %}
             <li class="doc-item">

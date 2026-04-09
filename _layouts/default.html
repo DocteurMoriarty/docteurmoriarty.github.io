@@ -9,22 +9,42 @@
   </head>
   <body>
     <div class="page-shell">
-      <header class="site-header">
+      <aside class="sidebar">
         <a class="brand" href="{{ '/' | relative_url }}">
-          <span class="brand-mark">DM</span>
           <span>
             <strong>{{ site.title }}</strong>
             <small>{{ site.description }}</small>
           </span>
         </a>
-        <nav class="site-nav">
-          <a href="{{ '/' | relative_url }}">Accueil</a>
-          <a href="{{ '/#categories' | relative_url }}">Categories</a>
-          <a href="{{ '/#articles' | relative_url }}">Articles</a>
-        </nav>
-      </header>
 
-      <main>
+        <nav class="sidebar-nav">
+          <a href="{{ '/' | relative_url }}">Accueil</a>
+        </nav>
+
+        <section class="sidebar-section">
+          <h2>Themes</h2>
+          <ul class="sidebar-list">
+            {% assign sorted_articles = site.articles | sort: "date" | reverse %}
+            {% for category in site.data.categories %}
+              {% assign posts_in_category = sorted_articles | where: "category", category.slug %}
+              {% if posts_in_category.size > 0 %}
+                <li><a href="{{ '/' | relative_url }}#{{ category.slug }}">{{ category.title }}</a></li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </section>
+
+        <section class="sidebar-section">
+          <h2>Recents</h2>
+          <ul class="sidebar-list">
+            {% for article in sorted_articles limit: 8 %}
+              <li><a href="{{ article.url | relative_url }}">{{ article.title }}</a></li>
+            {% endfor %}
+          </ul>
+        </section>
+      </aside>
+
+      <main class="content-area">
         {{ content }}
       </main>
     </div>

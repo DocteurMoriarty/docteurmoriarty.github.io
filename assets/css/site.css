@@ -1,12 +1,11 @@
 :root {
-  --bg: #f6f8f4;
+  --bg: #fbfcfa;
   --panel: #ffffff;
-  --panel-alt: #f0f5ef;
-  --line: #d7e3d4;
-  --text: #1f2a1f;
-  --muted: #5d6d5d;
-  --accent: #2f6b3b;
-  --accent-soft: #e3efe3;
+  --line: #d9e1d4;
+  --text: #20251f;
+  --muted: #5b6658;
+  --accent: #2e6a3d;
+  --accent-soft: #eef4ec;
 }
 
 * {
@@ -30,35 +29,39 @@ a {
 }
 
 code {
-  padding: 0.1rem 0.35rem;
-  border-radius: 4px;
+  padding: 0.08rem 0.3rem;
+  border-radius: 3px;
   background: var(--accent-soft);
   font-family: Consolas, "Courier New", monospace;
   font-size: 0.92em;
 }
 
 .page-shell {
-  width: min(980px, calc(100% - 32px));
+  width: min(1180px, calc(100% - 32px));
   margin: 0 auto;
-  padding: 20px 0 56px;
+  display: flex;
+  gap: 32px;
+  padding: 24px 0 48px;
+  align-items: flex-start;
 }
 
-.site-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  padding: 8px 0 24px;
-  margin-bottom: 24px;
-  border-bottom: 1px solid var(--line);
+.sidebar {
+  width: 260px;
+  flex: 0 0 260px;
+  position: sticky;
+  top: 24px;
+}
+
+.content-area {
+  min-width: 0;
+  flex: 1;
 }
 
 .brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
+  display: block;
   text-decoration: none;
   color: inherit;
+  margin-bottom: 28px;
 }
 
 .brand strong,
@@ -67,76 +70,77 @@ code {
 }
 
 .brand strong {
-  font-size: 1.05rem;
+  font-size: 1.2rem;
+  margin-bottom: 4px;
 }
 
 .brand small {
   color: var(--muted);
-  margin-top: 2px;
+  line-height: 1.6;
 }
 
-.brand-mark {
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--panel-alt);
-  color: var(--accent);
-  font-weight: 700;
+.sidebar-nav,
+.sidebar-section {
+  margin-bottom: 24px;
 }
 
-.site-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-}
-
-.site-nav a,
+.sidebar-nav a,
+.sidebar-list a,
 .back-link {
   color: var(--muted);
   text-decoration: none;
 }
 
-.site-nav a:hover,
+.sidebar-nav a:hover,
+.sidebar-list a:hover,
 .back-link:hover,
-.article-card h3 a:hover {
+.doc-item a:hover {
   color: var(--accent);
   text-decoration: underline;
 }
 
-.hero,
-.section-block,
+.sidebar-section h2 {
+  margin: 0 0 10px;
+  font-size: 0.95rem;
+  color: var(--accent);
+}
+
+.sidebar-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-left: 1px solid var(--line);
+}
+
+.sidebar-list li {
+  margin: 0;
+}
+
+.sidebar-list a {
+  display: block;
+  padding: 6px 0 6px 12px;
+}
+
+.doc-page,
 .article-page {
-  border: 1px solid var(--line);
-  border-radius: 8px;
   background: var(--panel);
 }
 
-.hero {
-  padding: 24px;
+.doc-header {
+  margin-bottom: 28px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
 }
 
-.eyebrow {
-  margin: 0 0 10px;
-  color: var(--accent);
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.hero h1,
+.doc-header h1,
 .article-header h1 {
-  margin: 0;
-  line-height: 1.15;
-  font-size: clamp(2rem, 5vw, 3.3rem);
+  margin: 0 0 8px;
+  line-height: 1.2;
+  font-size: 2rem;
 }
 
-.hero-copy,
+.doc-header p,
 .article-header p,
-.section-copy,
 .topic-section p,
 .article-content p,
 .article-content li {
@@ -144,55 +148,19 @@ code {
   line-height: 1.7;
 }
 
-.hero-copy {
-  max-width: 64ch;
-  margin-bottom: 0;
-}
-
-.section-block {
-  margin-top: 20px;
-  padding: 22px;
-}
-
-.section-block h2 {
-  margin: 0 0 8px;
-  font-size: 1.45rem;
-}
-
-.section-copy {
-  margin: 0 0 16px;
-}
-
-.topic-label {
-  display: block;
-  margin-bottom: 8px;
-  font-size: 0.92rem;
-  color: var(--muted);
-}
-
-.topic-select {
-  width: min(360px, 100%);
-  padding: 10px 12px;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  background: #fff;
-  color: var(--text);
-  font: inherit;
-}
-
 .topic-section + .topic-section {
-  margin-top: 24px;
-  padding-top: 24px;
+  margin-top: 30px;
+  padding-top: 22px;
   border-top: 1px solid var(--line);
 }
 
-.topic-section h3 {
-  margin: 0 0 6px;
-  font-size: 1.15rem;
+.topic-section h2 {
+  margin: 0 0 12px;
+  font-size: 1.35rem;
 }
 
 .topic-section p {
-  margin: 0 0 14px;
+  margin: 0 0 10px;
 }
 
 .doc-list {
@@ -202,7 +170,7 @@ code {
 }
 
 .doc-item {
-  padding: 12px 0;
+  padding: 10px 0;
   border-top: 1px solid var(--line);
 }
 
@@ -217,16 +185,11 @@ code {
   font-weight: 700;
 }
 
-.doc-item a:hover {
-  color: var(--accent);
-  text-decoration: underline;
-}
-
 .doc-item span {
   display: inline-block;
   margin-left: 10px;
   color: var(--accent);
-  font-size: 0.88rem;
+  font-size: 0.84rem;
 }
 
 .doc-item p {
@@ -235,76 +198,83 @@ code {
 
 .article-meta {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   gap: 12px;
+  margin-bottom: 18px;
 }
 
 .category-pill {
   display: inline-flex;
   align-items: center;
-  padding: 5px 10px;
-  border-radius: 999px;
-  border: 1px solid #bfd2bf;
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--line);
   background: var(--accent-soft);
   color: var(--accent);
-  font-size: 0.88rem;
+  font-size: 0.84rem;
 }
 
 .article-page {
-  padding: 24px;
+  padding: 0;
 }
 
 .article-header {
-  padding: 18px 0 10px;
+  padding: 0 0 12px;
   border-bottom: 1px solid var(--line);
 }
 
 .article-header p {
   max-width: 70ch;
-  margin: 14px 0 0;
+  margin: 8px 0 0;
 }
 
 .article-content {
-  padding-top: 18px;
+  padding-top: 20px;
 }
 
 .article-content h2,
 .article-content h3 {
-  margin-top: 30px;
+  margin-top: 28px;
   margin-bottom: 10px;
 }
 
 .article-content pre {
   overflow-x: auto;
   padding: 16px;
-  border-radius: 8px;
-  background: #f4f7f3;
+  border-radius: 4px;
+  background: #f5f8f3;
   border: 1px solid var(--line);
 }
 
 .article-content blockquote {
   margin: 20px 0;
   padding: 2px 0 2px 14px;
-  border-left: 3px solid #8db28d;
+  border-left: 3px solid #97b497;
   color: var(--muted);
 }
 
 .article-content img {
   max-width: 100%;
-  border-radius: 8px;
+  border: 1px solid var(--line);
+}
+
+@media (max-width: 900px) {
+  .page-shell {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .sidebar {
+    width: auto;
+    flex: none;
+    position: static;
+  }
 }
 
 @media (max-width: 760px) {
-  .site-header,
   .article-meta {
     flex-direction: column;
     align-items: flex-start;
-  }
-
-  .hero,
-  .section-block,
-  .article-page {
-    padding: 20px;
   }
 }
