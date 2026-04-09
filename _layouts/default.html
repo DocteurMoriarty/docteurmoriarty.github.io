@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'fr' }}">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+    <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | strip_newlines | truncate: 160 }}">
+    <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="{{ '/' | relative_url }}">
+          <span class="brand-mark">DM</span>
+          <span>
+            <strong>{{ site.title }}</strong>
+            <small>{{ site.description }}</small>
+          </span>
+        </a>
+        <nav class="site-nav">
+          <a href="{{ '/' | relative_url }}">Accueil</a>
+          <a href="{{ '/#categories' | relative_url }}">Categories</a>
+          <a href="{{ '/#articles' | relative_url }}">Articles</a>
+        </nav>
+      </header>
+
+      <main>
+        {{ content }}
+      </main>
+    </div>
+  </body>
+</html>

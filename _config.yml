@@ -1,0 +1,19 @@
+title: Docteur Moriarty
+description: Notes techniques, recherche offensive et documentation securite.
+lang: fr
+url: "https://docteurmoriarty.github.io"
+baseurl: ""
+markdown: kramdown
+permalink: /:collection/:name/
+collections:
+  articles:
+    output: true
+    permalink: /articles/:name/
+defaults:
+  - scope:
+      path: ""
+      type: "articles"
+    values:
+      layout: article
+author:
+  name: Docteur Moriarty

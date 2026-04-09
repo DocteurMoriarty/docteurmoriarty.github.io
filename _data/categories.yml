@@ -1,0 +1,30 @@
+- slug: pentest
+  title: Pentest
+  description: Methodologie offensive, exploitation et validation terrain.
+- slug: opsec
+  title: OPSEC
+  description: Hygiene operationnelle, discretion et reduction de surface.
+- slug: osint
+  title: OSINT
+  description: Collecte, pivoting et enrichment de cibles ouvertes.
+- slug: web-security
+  title: Web Security
+  description: Vulns applicatives, auth, logique metier et exposure web.
+- slug: cloud-security
+  title: Cloud Security
+  description: IAM, erreurs de configuration et traces d'attaque cloud.
+- slug: red-team
+  title: Red Team
+  description: Simulation d'adversaire, objectifs, chaines d'acces.
+- slug: blue-team
+  title: Blue Team
+  description: Detection, durcissement et reponse defensive.
+- slug: forensics
+  title: Forensics
+  description: Analyse post-incident, timeline et conservation de preuves.
+- slug: reverse-engineering
+  title: Reverse Engineering
+  description: Binaire, desassemblage et comprehension comportementale.
+- slug: malware-analysis
+  title: Malware Analysis
+  description: Triage, sandboxing et extraction d'indicateurs.
