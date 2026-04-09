@@ -6,55 +6,53 @@ title: Accueil
   <p class="eyebrow">Base de documentation</p>
   <h1>Documentation technique simple en Markdown.</h1>
   <p class="hero-copy">
-    Les articles de la collection <code>_articles/</code> sont publies automatiquement avec une mise en page
-    sobre. Il suffit d'ajouter un fichier <code>.md</code> avec une categorie et une date.
+    Une page d'accueil simple, des themes clairs et une liste d'articles lisible. Ajoute un fichier
+    <code>.md</code> dans <code>_articles/</code> et il apparait automatiquement.
   </p>
 </section>
 
 <section id="categories" class="section-block">
-  <div class="section-heading">
-    <h2>Categories</h2>
-    <p>Classement simple des sujets disponibles sur le site.</p>
-  </div>
-
-  <div class="category-grid">
+  <h2>Navigation par theme</h2>
+  <p class="section-copy">Choisis un theme pour aller directement a la bonne section.</p>
+  <label class="topic-label" for="topic-select">Themes</label>
+  <select id="topic-select" class="topic-select" onchange="if (this.value) window.location=this.value;">
+    <option value="">Selectionner un theme</option>
     {% for category in site.data.categories %}
       {% assign posts_in_category = site.articles | where: "category", category.slug %}
-      <article class="category-card">
-        <h3>{{ category.title }}</h3>
-        <p>{{ category.description }}</p>
-        <span>{{ posts_in_category | size }} article{% if posts_in_category.size > 1 %}s{% endif %}</span>
-      </article>
+      {% if posts_in_category.size > 0 %}
+        <option value="#{{ category.slug }}">{{ category.title }}</option>
+      {% endif %}
     {% endfor %}
-  </div>
+  </select>
 </section>
 
 <section id="articles" class="section-block">
-  <div class="section-heading">
-    <h2>Derniers articles</h2>
-    <p>Les derniers fichiers Markdown ajoutes dans <code>_articles/</code>.</p>
-  </div>
+  <h2>Articles</h2>
+  <p class="section-copy">Index simple des notes publiees.</p>
 
-  <div class="article-list">
-    {% assign sorted_articles = site.articles | sort: "date" | reverse %}
-    {% for article in sorted_articles %}
-      {% assign current_category = site.data.categories | where: "slug", article.category | first %}
-      <article class="article-card">
-        <div class="article-card-head">
-          {% if current_category %}
-            <span class="category-pill">{{ current_category.title }}</span>
-          {% endif %}
-          {% if article.date %}
-            <time datetime="{{ article.date | date_to_xmlschema }}">{{ article.date | date: "%d/%m/%Y" }}</time>
-          {% endif %}
-        </div>
-        <h3><a href="{{ article.url | relative_url }}">{{ article.title }}</a></h3>
-        {% if article.description %}
-          <p>{{ article.description }}</p>
-        {% else %}
-          <p>{{ article.excerpt | strip_html | truncate: 180 }}</p>
+  {% assign sorted_articles = site.articles | sort: "date" | reverse %}
+  {% for category in site.data.categories %}
+    {% assign posts_in_category = sorted_articles | where: "category", category.slug %}
+    {% if posts_in_category.size > 0 %}
+      <section id="{{ category.slug }}" class="topic-section">
+        <h3>{{ category.title }}</h3>
+        {% if category.description %}
+          <p>{{ category.description }}</p>
         {% endif %}
-      </article>
-    {% endfor %}
-  </div>
+        <ul class="doc-list">
+          {% for article in posts_in_category %}
+            <li class="doc-item">
+              <a href="{{ article.url | relative_url }}">{{ article.title }}</a>
+              {% if article.date %}
+                <span>{{ article.date | date: "%d/%m/%Y" }}</span>
+              {% endif %}
+              {% if article.description %}
+                <p>{{ article.description }}</p>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+    {% endif %}
+  {% endfor %}
 </section>

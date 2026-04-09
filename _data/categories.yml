@@ -8,23 +8,23 @@
   title: OSINT
   description: Collecte, pivoting et enrichment de cibles ouvertes.
 - slug: web-security
-  title: Web Security
-  description: Vulns applicatives, auth, logique metier et exposure web.
+  title: Exploit Web
+  description: Vulns applicatives, auth et chaines d'exploitation web.
 - slug: cloud-security
-  title: Cloud Security
+  title: Cloud
   description: IAM, erreurs de configuration et traces d'attaque cloud.
 - slug: red-team
   title: Red Team
   description: Simulation d'adversaire, objectifs, chaines d'acces.
 - slug: blue-team
-  title: Blue Team
-  description: Detection, durcissement et reponse defensive.
+  title: Hardening
+  description: Durcissement, reduction de surface et hygiene defensive.
 - slug: forensics
   title: Forensics
   description: Analyse post-incident, timeline et conservation de preuves.
 - slug: reverse-engineering
-  title: Reverse Engineering
-  description: Binaire, desassemblage et comprehension comportementale.
+  title: Pwn
+  description: Binaire, desassemblage, primitives memoire et exploitation.
 - slug: malware-analysis
-  title: Malware Analysis
+  title: Malware
   description: Triage, sandboxing et extraction d'indicateurs.

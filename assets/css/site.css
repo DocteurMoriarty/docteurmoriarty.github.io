@@ -110,12 +110,12 @@ code {
 .section-block,
 .article-page {
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 8px;
   background: var(--panel);
 }
 
 .hero {
-  padding: 32px;
+  padding: 24px;
 }
 
 .eyebrow {
@@ -136,9 +136,8 @@ code {
 
 .hero-copy,
 .article-header p,
-.section-heading p,
-.category-card p,
-.article-card p,
+.section-copy,
+.topic-section p,
 .article-content p,
 .article-content li {
   color: var(--muted);
@@ -152,59 +151,88 @@ code {
 
 .section-block {
   margin-top: 20px;
-  padding: 26px;
+  padding: 22px;
 }
 
-.section-heading {
-  margin-bottom: 18px;
-}
-
-.section-heading h2 {
+.section-block h2 {
   margin: 0 0 8px;
-  font-size: 1.5rem;
+  font-size: 1.45rem;
 }
 
-.section-heading p {
+.section-copy {
+  margin: 0 0 16px;
+}
+
+.topic-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+.topic-select {
+  width: min(360px, 100%);
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--text);
+  font: inherit;
+}
+
+.topic-section + .topic-section {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.topic-section h3 {
+  margin: 0 0 6px;
+  font-size: 1.15rem;
+}
+
+.topic-section p {
+  margin: 0 0 14px;
+}
+
+.doc-list {
+  list-style: none;
+  padding: 0;
   margin: 0;
 }
 
-.category-grid,
-.article-list {
-  display: grid;
-  gap: 14px;
+.doc-item {
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
 }
 
-.category-grid {
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+.doc-item:first-child {
+  border-top: 0;
+  padding-top: 0;
 }
 
-.category-card,
-.article-card {
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 18px;
-  background: var(--panel-alt);
-}
-
-.category-card h3,
-.article-card h3 {
-  margin: 0 0 8px;
-  font-size: 1.08rem;
-}
-
-.article-card h3 a {
+.doc-item a {
   color: var(--text);
   text-decoration: none;
+  font-weight: 700;
 }
 
-.category-card span,
-.article-card time,
-.category-pill {
+.doc-item a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.doc-item span {
+  display: inline-block;
+  margin-left: 10px;
   color: var(--accent);
   font-size: 0.88rem;
 }
 
-.article-card-head,
+.doc-item p {
+  margin: 6px 0 0;
+}
+
 .article-meta {
   display: flex;
   justify-content: space-between;
@@ -215,14 +243,16 @@ code {
 .category-pill {
   display: inline-flex;
   align-items: center;
-  padding: 6px 10px;
+  padding: 5px 10px;
   border-radius: 999px;
   border: 1px solid #bfd2bf;
   background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 0.88rem;
 }
 
 .article-page {
-  padding: 28px;
+  padding: 24px;
 }
 
 .article-header {
@@ -267,7 +297,6 @@ code {
 
 @media (max-width: 760px) {
   .site-header,
-  .article-card-head,
   .article-meta {
     flex-direction: column;
     align-items: flex-start;
