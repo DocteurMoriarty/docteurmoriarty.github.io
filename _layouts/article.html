@@ -3,11 +3,7 @@ layout: default
 ---
 <article class="article-page">
   <div class="article-meta">
-    <a class="back-link" href="{{ '/' | relative_url }}">Retour a l'accueil</a>
-    {% assign current_category = site.data.categories | where: "slug", page.category | first %}
-    {% if current_category %}
-      <span class="category-pill">{{ current_category.title }}</span>
-    {% endif %}
+    <a class="back-link" href="{{ '/' | relative_url }}">Back to index</a>
   </div>
 
   <header class="article-header">

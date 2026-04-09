@@ -1,30 +1,30 @@
 - slug: pentest
   title: Pentest
-  description: Methodologie offensive, exploitation et validation terrain.
+  description: Offensive assessment, exploitation workflow and validation.
 - slug: opsec
   title: OPSEC
-  description: Hygiene operationnelle, discretion et reduction de surface.
+  description: Operational security, exposure reduction and compartmentation.
 - slug: osint
   title: OSINT
-  description: Collecte, pivoting et enrichment de cibles ouvertes.
+  description: Target collection, pivoting and enrichment.
 - slug: web-security
-  title: Exploit Web
-  description: Vulns applicatives, auth et chaines d'exploitation web.
+  title: Web Exploitation
+  description: Application flaws, auth bypass and exploitation chains.
 - slug: cloud-security
-  title: Cloud
-  description: IAM, erreurs de configuration et traces d'attaque cloud.
+  title: Kubernetes
+  description: Cluster exposure, workload abuse and control-plane review.
 - slug: red-team
-  title: Red Team
-  description: Simulation d'adversaire, objectifs, chaines d'acces.
+  title: Initial Access
+  description: Entry vectors, delivery and access operations.
 - slug: blue-team
   title: Hardening
-  description: Durcissement, reduction de surface et hygiene defensive.
+  description: Surface reduction, baseline security and defensive hygiene.
 - slug: forensics
   title: Forensics
-  description: Analyse post-incident, timeline et conservation de preuves.
+  description: Timeline reconstruction, artefact review and evidence handling.
 - slug: reverse-engineering
   title: Pwn
-  description: Binaire, desassemblage, primitives memoire et exploitation.
+  description: Binary triage, memory corruption primitives and exploitation.
 - slug: malware-analysis
-  title: Malware
-  description: Triage, sandboxing et extraction d'indicateurs.
+  title: Maldev
+  description: Tradecraft, loader behavior and capability analysis.

@@ -4,30 +4,22 @@ title: Accueil
 ---
 <section class="doc-page">
   <header class="doc-header">
-    <h1>Documentation</h1>
-    <p>Index simple des notes publiees en Markdown.</p>
+    <h1>Index</h1>
+    <p>Technical notes published from Markdown files.</p>
   </header>
 
   {% assign sorted_articles = site.articles | sort: "date" | reverse %}
-  {% for category in site.data.categories %}
-    {% assign posts_in_category = sorted_articles | where: "category", category.slug %}
-    {% if posts_in_category.size > 0 %}
-      <section id="{{ category.slug }}" class="topic-section">
-        <h2>{{ category.title }}</h2>
-        <ul class="doc-list">
-          {% for article in posts_in_category %}
-            <li class="doc-item">
-              <a href="{{ article.url | relative_url }}">{{ article.title }}</a>
-              {% if article.date %}
-                <span>{{ article.date | date: "%d/%m/%Y" }}</span>
-              {% endif %}
-              {% if article.description %}
-                <p>{{ article.description }}</p>
-              {% endif %}
-            </li>
-          {% endfor %}
-        </ul>
-      </section>
-    {% endif %}
-  {% endfor %}
+  <ul class="doc-list">
+    {% for article in sorted_articles %}
+      <li class="doc-item">
+        <a href="{{ article.url | relative_url }}">{{ article.title }}</a>
+        {% if article.date %}
+          <span>{{ article.date | date: "%d/%m/%Y" }}</span>
+        {% endif %}
+        {% if article.description %}
+          <p>{{ article.description }}</p>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
 </section>

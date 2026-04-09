@@ -18,26 +18,14 @@
         </a>
 
         <nav class="sidebar-nav">
-          <a href="{{ '/' | relative_url }}">Accueil</a>
+          <a href="{{ '/' | relative_url }}">Index</a>
         </nav>
 
         <section class="sidebar-section">
-          <h2>Themes</h2>
+          <h2>Articles</h2>
           <ul class="sidebar-list">
             {% assign sorted_articles = site.articles | sort: "date" | reverse %}
-            {% for category in site.data.categories %}
-              {% assign posts_in_category = sorted_articles | where: "category", category.slug %}
-              {% if posts_in_category.size > 0 %}
-                <li><a href="{{ '/' | relative_url }}#{{ category.slug }}">{{ category.title }}</a></li>
-              {% endif %}
-            {% endfor %}
-          </ul>
-        </section>
-
-        <section class="sidebar-section">
-          <h2>Recents</h2>
-          <ul class="sidebar-list">
-            {% for article in sorted_articles limit: 8 %}
+            {% for article in sorted_articles %}
               <li><a href="{{ article.url | relative_url }}">{{ article.title }}</a></li>
             {% endfor %}
           </ul>
