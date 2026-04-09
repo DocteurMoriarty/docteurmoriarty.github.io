@@ -1,13 +1,12 @@
 :root {
-  --bg: #0b1020;
-  --panel: #121a31;
-  --panel-alt: #18213d;
-  --line: rgba(255, 255, 255, 0.08);
-  --text: #edf2ff;
-  --muted: #9da9cb;
-  --accent: #79e0c0;
-  --accent-2: #8ab6ff;
-  --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+  --bg: #f6f8f4;
+  --panel: #ffffff;
+  --panel-alt: #f0f5ef;
+  --line: #d7e3d4;
+  --text: #1f2a1f;
+  --muted: #5d6d5d;
+  --accent: #2f6b3b;
+  --accent-soft: #e3efe3;
 }
 
 * {
@@ -23,25 +22,25 @@ body {
   min-height: 100vh;
   font-family: Georgia, "Times New Roman", serif;
   color: var(--text);
-  background:
-    radial-gradient(circle at top left, rgba(121, 224, 192, 0.12), transparent 32%),
-    radial-gradient(circle at top right, rgba(138, 182, 255, 0.12), transparent 28%),
-    linear-gradient(180deg, #070b16 0%, #0b1020 55%, #09101c 100%);
+  background: var(--bg);
 }
 
 a {
-  color: inherit;
+  color: var(--accent);
 }
 
 code {
-  font-family: "Courier New", monospace;
-  font-size: 0.95em;
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  background: var(--accent-soft);
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 0.92em;
 }
 
 .page-shell {
-  width: min(1120px, calc(100% - 32px));
+  width: min(980px, calc(100% - 32px));
   margin: 0 auto;
-  padding: 24px 0 72px;
+  padding: 20px 0 56px;
 }
 
 .site-header {
@@ -49,14 +48,17 @@ code {
   justify-content: space-between;
   align-items: center;
   gap: 16px;
-  padding: 18px 0 28px;
+  padding: 8px 0 24px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--line);
 }
 
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   text-decoration: none;
+  color: inherit;
 }
 
 .brand strong,
@@ -64,26 +66,31 @@ code {
   display: block;
 }
 
+.brand strong {
+  font-size: 1.05rem;
+}
+
 .brand small {
   color: var(--muted);
-  margin-top: 3px;
+  margin-top: 2px;
 }
 
 .brand-mark {
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   border: 1px solid var(--line);
-  border-radius: 12px;
-  background: linear-gradient(135deg, rgba(121, 224, 192, 0.14), rgba(138, 182, 255, 0.14));
-  box-shadow: var(--shadow);
+  border-radius: 8px;
+  background: var(--panel-alt);
+  color: var(--accent);
+  font-weight: 700;
 }
 
 .site-nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 18px;
+  gap: 16px;
 }
 
 .site-nav a,
@@ -96,35 +103,35 @@ code {
 .back-link:hover,
 .article-card h3 a:hover {
   color: var(--accent);
+  text-decoration: underline;
 }
 
 .hero,
 .section-block,
 .article-page {
   border: 1px solid var(--line);
-  border-radius: 28px;
-  background: linear-gradient(180deg, rgba(18, 26, 49, 0.92), rgba(12, 18, 35, 0.92));
-  box-shadow: var(--shadow);
+  border-radius: 12px;
+  background: var(--panel);
 }
 
 .hero {
-  padding: 54px;
+  padding: 32px;
 }
 
 .eyebrow {
-  margin: 0 0 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
+  margin: 0 0 10px;
   color: var(--accent);
-  font-size: 0.78rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .hero h1,
 .article-header h1 {
   margin: 0;
-  max-width: 12ch;
-  line-height: 0.96;
-  font-size: clamp(2.6rem, 8vw, 5.6rem);
+  line-height: 1.15;
+  font-size: clamp(2rem, 5vw, 3.3rem);
 }
 
 .hero-copy,
@@ -135,31 +142,36 @@ code {
 .article-content p,
 .article-content li {
   color: var(--muted);
-  line-height: 1.75;
+  line-height: 1.7;
+}
+
+.hero-copy {
+  max-width: 64ch;
+  margin-bottom: 0;
 }
 
 .section-block {
-  margin-top: 28px;
-  padding: 34px;
+  margin-top: 20px;
+  padding: 26px;
 }
 
 .section-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
-  gap: 24px;
-  margin-bottom: 22px;
+  margin-bottom: 18px;
 }
 
 .section-heading h2 {
+  margin: 0 0 8px;
+  font-size: 1.5rem;
+}
+
+.section-heading p {
   margin: 0;
-  font-size: 1.7rem;
 }
 
 .category-grid,
 .article-list {
   display: grid;
-  gap: 18px;
+  gap: 14px;
 }
 
 .category-grid {
@@ -169,22 +181,27 @@ code {
 .category-card,
 .article-card {
   border: 1px solid var(--line);
-  border-radius: 22px;
-  padding: 22px;
-  background: linear-gradient(180deg, rgba(24, 33, 61, 0.88), rgba(15, 22, 40, 0.92));
+  border-radius: 10px;
+  padding: 18px;
+  background: var(--panel-alt);
 }
 
 .category-card h3,
 .article-card h3 {
-  margin: 0 0 10px;
-  font-size: 1.2rem;
+  margin: 0 0 8px;
+  font-size: 1.08rem;
+}
+
+.article-card h3 a {
+  color: var(--text);
+  text-decoration: none;
 }
 
 .category-card span,
 .article-card time,
 .category-pill {
-  color: var(--accent-2);
-  font-size: 0.85rem;
+  color: var(--accent);
+  font-size: 0.88rem;
 }
 
 .article-card-head,
@@ -192,64 +209,64 @@ code {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 }
 
 .category-pill {
   display: inline-flex;
   align-items: center;
-  padding: 7px 12px;
+  padding: 6px 10px;
   border-radius: 999px;
-  border: 1px solid rgba(138, 182, 255, 0.24);
-  background: rgba(138, 182, 255, 0.08);
+  border: 1px solid #bfd2bf;
+  background: var(--accent-soft);
 }
 
 .article-page {
-  padding: 30px 34px 44px;
+  padding: 28px;
 }
 
 .article-header {
-  padding: 18px 0 14px;
+  padding: 18px 0 10px;
+  border-bottom: 1px solid var(--line);
 }
 
 .article-header p {
   max-width: 70ch;
-  margin-top: 18px;
+  margin: 14px 0 0;
 }
 
 .article-content {
-  padding-top: 12px;
+  padding-top: 18px;
 }
 
 .article-content h2,
 .article-content h3 {
-  margin-top: 34px;
-  margin-bottom: 12px;
+  margin-top: 30px;
+  margin-bottom: 10px;
 }
 
 .article-content pre {
   overflow-x: auto;
-  padding: 18px;
-  border-radius: 18px;
-  background: rgba(9, 16, 28, 0.92);
+  padding: 16px;
+  border-radius: 8px;
+  background: #f4f7f3;
   border: 1px solid var(--line);
 }
 
 .article-content blockquote {
-  margin: 24px 0;
-  padding: 4px 0 4px 18px;
-  border-left: 3px solid var(--accent);
+  margin: 20px 0;
+  padding: 2px 0 2px 14px;
+  border-left: 3px solid #8db28d;
   color: var(--muted);
 }
 
 .article-content img {
   max-width: 100%;
-  border-radius: 18px;
+  border-radius: 8px;
 }
 
 @media (max-width: 760px) {
   .site-header,
-  .section-heading,
   .article-card-head,
   .article-meta {
     flex-direction: column;
@@ -259,11 +276,6 @@ code {
   .hero,
   .section-block,
   .article-page {
-    padding: 24px;
-  }
-
-  .hero h1,
-  .article-header h1 {
-    max-width: none;
+    padding: 20px;
   }
 }
