@@ -1,33 +1,235 @@
----
-layout: default
-title: Accueil
----
-<section class="doc-page">
-  <header class="doc-header">
-    <h1>Index</h1>
-    <p>Technical notes organized by topic.</p>
-  </header>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docteur Moriarty</title>
+    <meta name="description" content="Technical notes organized by topic.">
+    <link rel="stylesheet" href="assets/css/site.css">
+  </head>
+  <body>
+    <div class="page-shell">
+      <aside class="sidebar">
+        <a class="brand" href="#top">
+          <strong>Docteur Moriarty</strong>
+          <small>Technical notes and research index</small>
+        </a>
 
-  {% assign sorted_articles = site.articles | sort: "date" | reverse %}
-  {% for category in site.data.categories %}
-    {% assign posts_in_category = sorted_articles | where: "category", category.slug %}
-    {% if posts_in_category.size > 0 %}
-      <section id="{{ category.slug }}" class="topic-section">
-        <h2>{{ category.title }}</h2>
-        <ul class="doc-list">
-          {% for article in posts_in_category %}
-            <li class="doc-item">
-              <a href="{{ article.url | relative_url }}">{{ article.title }}</a>
-              {% if article.date %}
-                <span>{{ article.date | date: "%d/%m/%Y" }}</span>
-              {% endif %}
-              {% if article.description %}
-                <p>{{ article.description }}</p>
-              {% endif %}
-            </li>
-          {% endfor %}
-        </ul>
-      </section>
-    {% endfor %}
-  {% endfor %}
-</section>
+        <nav class="sidebar-nav">
+          <a href="#top">Index</a>
+        </nav>
+
+        <section class="sidebar-section">
+          <h2>Topics</h2>
+          <ul class="sidebar-list">
+            <li><a href="#pentest">Pentest</a></li>
+            <li><a href="#opsec">OPSEC</a></li>
+            <li><a href="#osint">OSINT</a></li>
+            <li><a href="#web-exploitation">Web Exploitation</a></li>
+            <li><a href="#kubernetes">Kubernetes</a></li>
+            <li><a href="#initial-access">Initial Access</a></li>
+            <li><a href="#hardening">Hardening</a></li>
+            <li><a href="#forensics">Forensics</a></li>
+            <li><a href="#pwn">Pwn</a></li>
+            <li><a href="#maldev">Maldev</a></li>
+          </ul>
+        </section>
+
+        <section class="sidebar-section">
+          <h2>Articles</h2>
+          <ul class="sidebar-list">
+            <li><a href="#article-exploitation-chain">Internal Web Perimeter Exploitation Chain</a></li>
+            <li><a href="#article-workstation-hygiene">OPSEC Workstation Checklist</a></li>
+            <li><a href="#article-target-enrichment">Enterprise Target Enrichment</a></li>
+            <li><a href="#article-session-hardening">Session Hardening Review</a></li>
+            <li><a href="#article-iam-review">Kubernetes IAM Review</a></li>
+            <li><a href="#article-initial-access-notes">Initial Access Notes</a></li>
+            <li><a href="#article-detection-coverage">Detection Coverage Review</a></li>
+            <li><a href="#article-timeline-first">Timeline-First Forensics</a></li>
+            <li><a href="#article-triage-binaire">Initial Binary Triage</a></li>
+            <li><a href="#article-sandbox-notes">Maldev Sandboxing Notes</a></li>
+          </ul>
+        </section>
+      </aside>
+
+      <main class="content-area" id="top">
+        <section class="doc-page">
+          <header class="doc-header">
+            <h1>Index</h1>
+            <p>Technical notes organized by topic.</p>
+          </header>
+
+          <section class="topic-section" id="pentest">
+            <h2>Pentest</h2>
+            <article class="article-block" id="article-exploitation-chain">
+              <header class="article-header">
+                <h3>Internal Web Perimeter Exploitation Chain</h3>
+                <p class="article-meta-line">2026-04-09</p>
+                <p>A short note documenting a realistic chain of flaw, pivot and validation.</p>
+              </header>
+              <div class="article-content">
+                <h4>Objective</h4>
+                <p>Document a reproducible path from an exposed web entry point to usable access.</p>
+                <h4>Sequence</h4>
+                <ol>
+                  <li>Application enumeration.</li>
+                  <li>Authentication bypass validation.</li>
+                  <li>Extraction of a reusable secret.</li>
+                  <li>Pivot to an internal interface.</li>
+                </ol>
+                <h4>Takeaway</h4>
+                <p>Markdown was enough to publish this note. Replace this content with real field notes when needed.</p>
+              </div>
+            </article>
+          </section>
+
+          <section class="topic-section" id="opsec">
+            <h2>OPSEC</h2>
+            <article class="article-block" id="article-workstation-hygiene">
+              <header class="article-header">
+                <h3>OPSEC Workstation Checklist</h3>
+                <p class="article-meta-line">2026-04-08</p>
+                <p>Baseline measures to isolate usage, identities and technical traces.</p>
+              </header>
+              <div class="article-content">
+                <h4>Segmentation</h4>
+                <p>Separate environments, browsers, profiles and accounts. Avoid unnecessary overlap between identities.</p>
+                <h4>Telemetry</h4>
+                <p>Observe what the workstation emits before reasoning about discretion.</p>
+              </div>
+            </article>
+          </section>
+
+          <section class="topic-section" id="osint">
+            <h2>OSINT</h2>
+            <article class="article-block" id="article-target-enrichment">
+              <header class="article-header">
+                <h3>Enterprise Target Enrichment</h3>
+                <p class="article-meta-line">2026-04-07</p>
+                <p>Open sources, cross-referenced data points and a basic target graph.</p>
+              </header>
+              <div class="article-content">
+                <h4>Sources</h4>
+                <ul>
+                  <li>Public DNS records</li>
+                  <li>Document metadata</li>
+                  <li>Historical leaks</li>
+                  <li>Exposed technical references</li>
+                </ul>
+              </div>
+            </article>
+          </section>
+
+          <section class="topic-section" id="web-exploitation">
+            <h2>Web Exploitation</h2>
+            <article class="article-block" id="article-session-hardening">
+              <header class="article-header">
+                <h3>Session Hardening Review</h3>
+                <p class="article-meta-line">2026-04-06</p>
+                <p>Core checks before calling a session model secure.</p>
+              </header>
+              <div class="article-content">
+                <h4>Control</h4>
+                <p>Review token creation, rotation, invalidation and scope boundaries.</p>
+              </div>
+            </article>
+          </section>
+
+          <section class="topic-section" id="kubernetes">
+            <h2>Kubernetes</h2>
+            <article class="article-block" id="article-iam-review">
+              <header class="article-header">
+                <h3>Kubernetes IAM Review</h3>
+                <p class="article-meta-line">2026-04-05</p>
+                <p>Quick review points for excessive rights and weak trust relations.</p>
+              </header>
+              <div class="article-content">
+                <h4>Focus Areas</h4>
+                <ul>
+                  <li>Service accounts</li>
+                  <li>Overly permissive roles</li>
+                  <li>Persistent secrets</li>
+                </ul>
+              </div>
+            </article>
+          </section>
+
+          <section class="topic-section" id="initial-access">
+            <h2>Initial Access</h2>
+            <article class="article-block" id="article-initial-access-notes">
+              <header class="article-header">
+                <h3>Initial Access Notes</h3>
+                <p class="article-meta-line">2026-04-04</p>
+                <p>Scoping notes to stay aligned with the objective of the exercise.</p>
+              </header>
+              <div class="article-content">
+                <h4>Rule</h4>
+                <p>The entry vector matters less than the full chain of decision, proof and control.</p>
+              </div>
+            </article>
+          </section>
+
+          <section class="topic-section" id="hardening">
+            <h2>Hardening</h2>
+            <article class="article-block" id="article-detection-coverage">
+              <header class="article-header">
+                <h3>Detection Coverage Review</h3>
+                <p class="article-meta-line">2026-04-03</p>
+                <p>Map available telemetry to the techniques you actually want to observe.</p>
+              </header>
+              <div class="article-content">
+                <h4>Priority</h4>
+                <p>Start with reliable events before stacking brittle detections.</p>
+              </div>
+            </article>
+          </section>
+
+          <section class="topic-section" id="forensics">
+            <h2>Forensics</h2>
+            <article class="article-block" id="article-timeline-first">
+              <header class="article-header">
+                <h3>Timeline-First Forensics</h3>
+                <p class="article-meta-line">2026-04-02</p>
+                <p>Reconstruct facts before trying to explain intent.</p>
+              </header>
+              <div class="article-content">
+                <h4>Principle</h4>
+                <p>A clean timeline prevents many narrative errors during analysis.</p>
+              </div>
+            </article>
+          </section>
+
+          <section class="topic-section" id="pwn">
+            <h2>Pwn</h2>
+            <article class="article-block" id="article-triage-binaire">
+              <header class="article-header">
+                <h3>Initial Binary Triage</h3>
+                <p class="article-meta-line">2026-04-01</p>
+                <p>Static first pass to understand format, imports and obvious risk areas.</p>
+              </header>
+              <div class="article-content">
+                <h4>Triage</h4>
+                <p>Hash, file format, sections, imports, strings and visible artefacts before any execution.</p>
+              </div>
+            </article>
+          </section>
+
+          <section class="topic-section" id="maldev">
+            <h2>Maldev</h2>
+            <article class="article-block" id="article-sandbox-notes">
+              <header class="article-header">
+                <h3>Maldev Sandboxing Notes</h3>
+                <p class="article-meta-line">2026-03-31</p>
+                <p>What to observe during controlled execution to extract useful indicators.</p>
+              </header>
+              <div class="article-content">
+                <h4>Observe</h4>
+                <p>Processes, files, mutexes, network activity, persistence and timing.</p>
+              </div>
+            </article>
+          </section>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
